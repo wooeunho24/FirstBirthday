@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffaf0">
+  <meta name="description" content="우은호의 첫돌에 초대합니다. 2026년 12월 13일 오후 12시">
+  <title>우은호의 첫돌 초대장</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #fffaf0;
+      --section: #f7f3e9;
+      --ink: #343640;
+      --muted: #777b86;
+      --accent: #4059a6;
+      --accent-soft: #e8ecf7;
+      --line: #e0e2e8;
+      --serif: "Gowun Batang", "Batang", serif;
+      --sans: "Gowun Dodum", sans-serif;
+      --display: "Jua", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #edf0f7;
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    .page { width: min(100%, 520px); margin: 0 auto; overflow: hidden; background: var(--paper); }
+    .hero { padding: 36px 0 0; background: var(--paper); text-align: center; }
+    .hero-copy { padding: 0 20px 22px; }
+    .eyebrow { margin: 0 0 5px; color: var(--accent); font-size: 11px; letter-spacing: .16em; }
+    h1 { margin: 0; color: var(--accent); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.25; }
+    .hero-korean { margin: 5px 0 0; color: var(--ink); font-family: var(--serif); font-size: 16px; }
+    .hero img { display: block; width: calc(100% - 36px); aspect-ratio: 1 / 1.08; margin: 0 auto; object-fit: cover; object-position: 50% 42%; }
+    .hero-date { display: flex; justify-content: center; gap: 12px; margin: 0; padding: 17px 12px; color: var(--accent); font-size: 13px; letter-spacing: .03em; }
+    .hero-date span + span { padding-left: 12px; border-left: 1px solid var(--line); }
+    .intro { padding: 58px 28px 54px; text-align: center; background: var(--section); }
+    .section-label { margin: 0 0 16px; color: var(--accent); font-size: 11px; letter-spacing: .16em; }
+    .intro h2, .section-heading { margin: 0; font-family: var(--serif); font-size: 25px; font-weight: 400; line-height: 1.7; }
+    .intro-copy { margin: 19px 0 0; color: var(--muted); font-size: 14px; line-height: 2; }
+    .family-line { display: flex; justify-content: center; gap: 7px; margin: 22px 0 0; color: var(--ink); font-family: var(--serif); font-size: 14px; }
+    .family-line span { color: var(--accent); font-family: var(--sans); font-size: 11px; }
+    .divider { width: 38px; height: 1px; margin: 26px auto 0; background: var(--line); }
+    .calendar-section { padding: 58px 28px 62px; text-align: center; }
+    .calendar-section .section-label { margin-bottom: 10px; }
+    .calendar-title { margin: 0 0 22px; color: var(--accent); font-family: var(--display); font-size: 29px; font-weight: 400; }
+    .calendar { width: 100%; max-width: 350px; margin: 0 auto; border-collapse: collapse; table-layout: fixed; }
+    .calendar caption { padding: 0 0 12px; color: var(--ink); font-family: var(--serif); font-size: 17px; }
+    .calendar th { height: 37px; color: var(--muted); font-size: 11px; font-weight: 400; }
+    .calendar td { height: 42px; color: #625a51; font-size: 13px; }
+    .calendar th:first-child, .calendar td:first-child { color: var(--accent); }
+    .calendar .birthday { color: white; font-weight: 700; }
+    .calendar .birthday span { display: grid; width: 29px; height: 29px; margin: 0 auto; place-items: center; border-radius: 50%; background: var(--accent); color: #fff; }
+    .event-summary { margin: 22px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .gallery { padding: 5px 22px 68px; }
+    .gallery-heading { display: flex; align-items: end; justify-content: space-between; margin: 0 3px 17px; }
+    .gallery-heading .section-label { margin: 0 0 6px; }
+    .gallery-heading h2 { margin: 0; font-family: var(--serif); font-size: 21px; font-weight: 400; }
+    .gallery-note { color: var(--muted); font-size: 11px; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .photo-grid img { display: block; width: 100%; height: 210px; object-fit: cover; }
+    .photo-grid img:nth-child(2) { object-position: 50% 40%; }
+    .photo-grid img:nth-child(3) { object-position: 50% 35%; }
+    .photo-grid img:nth-child(4) { object-position: 50% 35%; }
+    .location { padding: 58px 22px 58px; background: var(--section); }
+    .location .section-label, .location .section-heading { text-align: center; }
+    .location .section-label { margin-bottom: 12px; }
+    .venue-name { margin: 16px 0 0; color: var(--accent); font-family: var(--serif); font-size: 18px; text-align: center; }
+    .address { margin: 7px 0 22px; color: var(--muted); font-size: 13px; line-height: 1.8; text-align: center; }
+    .map-frame { position: relative; display: block; width: 100%; overflow: hidden; background: #f0f1f5; }
+    .map-frame .root_daum_roughmap { width: 100% !important; }
+    .map-links { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 12px; }
+    .map-link { display: flex; min-height: 48px; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 13px; text-decoration: none; transition: background .2s, transform .2s; }
+    .map-link:hover { transform: translateY(-2px); background: white; }
+    .map-mark { display: grid; width: 19px; height: 19px; place-items: center; border-radius: 50%; color: white; font-size: 10px; font-weight: 700; }
+    .naver-mark { background: #03a65a; }
+    .kakao-mark { background: #fae100; color: #3b3326; }
+    .upload { padding: 60px 26px 68px; text-align: center; background: var(--section); }
+    .upload .section-label { margin-bottom: 12px; }
+    .upload .section-heading { font-size: 23px; }
+    .upload-copy { margin: 13px 0 23px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .upload-prize { max-width: 350px; margin: 0 auto 24px; padding: 12px 8px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--accent); font-family: var(--serif); font-size: 13px; line-height: 1.8; }
+    .upload-button { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 9px; padding: 0 23px; border: 0; background: var(--accent); color: white; cursor: pointer; font-size: 14px; text-decoration: none; transition: background .2s, transform .2s; }
+    .upload-button:hover { transform: translateY(-2px); background: #304987; }
+    .upload-button:focus-visible, .map-link:focus-visible { outline: 3px solid #7487c0; outline-offset: 3px; }
+    .upload-icon { font-size: 18px; line-height: 1; }
+    .footer { padding: 20px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--serif); font-size: 12px; text-align: center; }
+    @media (min-width: 700px) {
+      body { padding: 32px 0; background-color: #edf0f7; background-image: radial-gradient(ellipse at 15% 15%, rgb(255 255 255 / 70%), transparent 35%), radial-gradient(ellipse at 90% 85%, rgb(126 145 185 / 11%), transparent 40%); }
+      .page { box-shadow: 0 18px 70px rgb(61 45 30 / 16%); }
+    }
+    @media (max-width: 360px) {
+      .hero { padding-top: 30px; }
+      h1 { font-size: 41px; }
+      .hero-date { gap: 8px; font-size: 12px; }
+      .hero-date span + span { padding-left: 8px; }
+      .photo-grid img { height: 170px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">A LITTLE MIRACLE, ONE YEAR</p>
+        <h1>First Birthday</h1>
+        <p class="hero-korean">우은호의 첫 번째 생일에 초대합니다</p>
+      </div>
+      <img src="images/서있는것.jpg" alt="한복을 입고 환하게 웃는 아기의 사진">
+      <p class="hero-date"><span>2026년 12월 13일 일요일</span><span>오후 12시</span></p>
+    </header>
+
+    <section class="intro" aria-labelledby="intro-title">
+      <p class="section-label">WITH LOVE</p>
+      <h2 id="intro-title">작은 손을 잡고 걸어온<br>첫 번째 계절</h2>
+      <p class="intro-copy">사랑과 웃음으로 채워온 첫돌을 맞아<br>소중한 분들을 모시고 감사의 마음을 나누려 합니다.<br>함께해 주시면 큰 기쁨이 되겠습니다.</p>
+      <p class="family-line"><span>아빠</span> 우철희 <span>엄마</span> 이선영</p>
+      <div class="divider" aria-hidden="true"></div>
+    </section>
+
+    <section class="calendar-section" aria-labelledby="calendar-title">
+      <p class="section-label">PLEASE SAVE THE DATE</p>
+      <h2 class="calendar-title" id="calendar-title">돌잔치 안내</h2>
+      <table class="calendar">
+        <caption>2026년 12월</caption>
+        <thead>
+          <tr>
+            <th scope="col">일</th><th scope="col">월</th><th scope="col">화</th>
+            <th scope="col">수</th><th scope="col">목</th><th scope="col">금</th><th scope="col">토</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+          <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+          <tr><td class="birthday" aria-label="돌잔치 날짜, 12월 13일"><span>13</span></td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+          <tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+          <tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <p class="event-summary">2026년 12월 13일 일요일<br>오후 12시</p>
+    </section>
+
+    <section class="gallery" aria-labelledby="gallery-title">
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">OUR LITTLE MOMENTS</p>
+          <h2 id="gallery-title">함께 자란 시간</h2>
+        </div>
+        <span class="gallery-note">a year of love</span>
+      </div>
+      <div class="photo-grid">
+        <img src="images/앉기.jpg" alt="돌잔치 한복을 입은 아기" loading="lazy">
+        <img src="images/연주.jpg" alt="아기의 사랑스러운 순간" loading="lazy">
+        <img src="images/촌캉스.jpg" alt="즐거운 시간을 보내는 아기" loading="lazy">
+        <img src="images/서있는것.jpg" alt="환하게 웃는 아기" loading="lazy">
+      </div>
+    </section>
+
+    <section class="location" aria-labelledby="location-title">
+      <p class="section-label">COME AND CELEBRATE</p>
+      <h2 class="section-heading" id="location-title">오시는 길</h2>
+      <p class="venue-name">호텔 라뷔포레 웨딩</p>
+      <p class="address">경기 수원시 팔달구 권광로134번길 46</p>
+      <div class="map-frame" role="application" aria-label="호텔 라뷔포레 웨딩 카카오 지도">
+        <div id="daumRoughmapContainer1793107558171" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+      </div>
+      <div class="map-links">
+        <a class="map-link" href="https://naver.me/xcnaMlVU" target="_blank" rel="noopener noreferrer" aria-label="네이버 지도로 길 찾기">
+          <span class="map-mark naver-mark" aria-hidden="true">N</span> 네이버 지도
+        </a>
+        <a class="map-link" href="https://kko.to/qiNaMw1h-O" target="_blank" rel="noopener noreferrer" aria-label="카카오맵으로 길 찾기">
+          <span class="map-mark kakao-mark" aria-hidden="true">K</span> 카카오맵
+        </a>
+      </div>
+    </section>
+
+    <section class="upload" aria-labelledby="upload-title">
+      <p class="section-label">GUEST MOMENTS</p>
+      <h2 class="section-heading" id="upload-title">은호의 첫돌 순간을<br>함께 기록해주세요</h2>
+      <p class="upload-copy">사진과 영상으로 함께한 순간을 보내주세요.<br>소중한 추억으로 간직하겠습니다.</p>
+      <p class="upload-prize">예쁜 사진을 많이 올려주신 분들 중 세 분을 추첨해 경품을 드립니다!</p>
+      <a class="upload-button" href="upload.html">
+        <span class="upload-icon" aria-hidden="true">＋</span> 사진 및 영상 전달하기
+      </a>
+    </section>
+
+    <footer class="footer">함께 축하해 주셔서 고맙습니다</footer>
+  </main>
+
+  <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://t1.kakaocdn.net/kakaomapweb/roughmap/loader/prod/roughmapLoader.js"></script>
+  <script>
+    const mapContainer = document.querySelector("#daumRoughmapContainer1793107558171");
+    const mapWidth = Math.min(640, Math.round(mapContainer.getBoundingClientRect().width));
+    const mapHeight = Math.round(mapWidth * 360 / 640);
+
+    new daum.roughmap.Lander({
+      timestamp: "1793107558171",
+      key: "4z9ijod2wde",
+      mapWidth: String(mapWidth),
+      mapHeight: String(mapHeight)
+    }).render();
+  </script>
+</body>
+</html>
