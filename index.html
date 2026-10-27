@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fffaf0">
   <meta name="description" content="우은호의 첫돌에 초대합니다. 2026년 12월 13일 오후 12시">
-  <title>우은호의 첫돌 초대장</title>
+  <meta property="og:title" content="우은호의 첫 번째 생일에 초대합니다">
+  <title>우은호의 첫 번째 생일에 초대합니다</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script>
+    if (!window.location.hash) {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#우은호의-첫-번째-생일에-초대합니다`);
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap" rel="stylesheet">
@@ -120,7 +127,7 @@
 </head>
 <body>
   <main class="page">
-    <button class="music-toggle" id="music-toggle" type="button" aria-label="배경음악 켜기" aria-pressed="false" title="배경음악 켜기">
+    <button class="music-toggle" id="music-toggle" type="button" aria-label="배경음악 끄기" aria-pressed="true" title="배경음악 끄기">
       <svg class="music-icon music-icon-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
       <svg class="music-icon music-icon-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle><path d="M4 4l16 16"></path></svg>
     </button>
@@ -211,13 +218,14 @@
     <footer class="footer">함께 축하해 주셔서 고맙습니다</footer>
   </main>
 
-  <audio id="background-music" src="music/song.mp3" preload="auto" loop></audio>
+  <audio id="background-music" src="music/song.mp3" preload="auto" autoplay loop></audio>
 
   <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://t1.kakaocdn.net/kakaomapweb/roughmap/loader/prod/roughmapLoader.js"></script>
   <script>
     const backgroundMusic = document.querySelector("#background-music");
     const musicToggle = document.querySelector("#music-toggle");
-    let musicEnabled = false;
+    let musicEnabled = true;
+    let userDisabledMusic = false;
     let musicRequest = 0;
 
     function updateMusicToggle(isPlaying) {
@@ -249,7 +257,16 @@
       });
     }
 
-    musicToggle.addEventListener("click", () => setMusicEnabled(!musicEnabled));
+    document.addEventListener("pointerdown", event => {
+      if (!userDisabledMusic && !musicToggle.contains(event.target)) {
+        setMusicEnabled(true);
+      }
+    }, true);
+
+    musicToggle.addEventListener("click", () => {
+      userDisabledMusic = musicEnabled;
+      setMusicEnabled(!musicEnabled);
+    });
     setMusicEnabled(true);
 
     const mapContainer = document.querySelector("#daumRoughmapContainer1793107558171");
