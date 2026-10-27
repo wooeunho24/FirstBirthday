@@ -1,8 +1,14 @@
 const DRIVE_FOLDER_ID = "1muVdYqtyijGhHhPSpgd2JvMwZJW5Avz7";
 const MAX_FILE_BYTES = 20 * 1024 * 1024;
+const UPLOAD_DEADLINE = "2026-12-15";
 
 function doPost(event) {
   try {
+    const todayInSeoul = Utilities.formatDate(new Date(), "Asia/Seoul", "yyyy-MM-dd");
+    if (todayInSeoul > UPLOAD_DEADLINE) {
+      return respond({ ok: false, error: "업로드 기간이 종료되었습니다." });
+    }
+
     const payload = JSON.parse(event.postData.contents);
     const name = String(payload.name || "").replace(/[\\/:*?"<>|]/g, "_").slice(0, 150);
     const mimeType = String(payload.mimeType || "");
@@ -11,7 +17,7 @@ function doPost(event) {
     if (!name || !/^(image\/|video\/)/.test(mimeType) || !encoded) {
       return respond({ ok: false, error: "지원하지 않는 파일입니다." });
     }
-    if (DRIVE_FOLDER_ID === "1muVdYqtyijGhHhPSpgd2JvMwZJW5Avz7") {
+    if (DRIVE_FOLDER_ID === "PASTE_GOOGLE_DRIVE_FOLDER_ID_HERE") {
       return respond({ ok: false, error: "Drive 폴더 ID를 설정해 주세요." });
     }
 

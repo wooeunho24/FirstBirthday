@@ -17,6 +17,7 @@
       --ink: #343640;
       --muted: #777b86;
       --accent: #4059a6;
+      --accent-soft: #e8ecf7;
       --line: #e0e2e8;
       --serif: "Gowun Batang", "Batang", serif;
       --sans: "Gowun Dodum", sans-serif;
@@ -30,18 +31,22 @@
     .page { width: min(100%, 520px); min-height: 100vh; margin: 0 auto; padding: 20px 24px 48px; background: var(--paper); }
     .back-link { display: inline-flex; min-height: 40px; align-items: center; color: var(--accent); font-size: 13px; text-decoration: none; }
     .back-link span { margin-right: 7px; font-size: 18px; }
+    .upload-hero { display: block; width: 86%; max-width: 380px; height: auto; margin: 18px auto 0; }
     .upload-header { padding: 32px 0 22px; text-align: center; }
     .eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 11px; letter-spacing: .16em; }
     h1 { margin: 0; color: var(--accent); font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1.4; }
     .intro { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .deadline-note { margin: 12px 0 0; color: var(--accent); font-size: 12px; }
     .prompts-heading { margin: 20px 0 11px; color: var(--ink); font-family: var(--serif); font-size: 15px; font-weight: 400; }
     .photo-prompts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 10px; padding: 15px 0 17px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .photo-prompt { color: var(--muted); font-size: 11px; line-height: 1.65; }
     .photo-prompt strong { display: block; margin-bottom: 2px; color: var(--ink); font-size: 12px; font-weight: 400; }
-    .prize { margin: 0; padding: 15px 7px; border-bottom: 1px solid var(--line); color: var(--accent); font-family: var(--serif); font-size: 13px; line-height: 1.8; text-align: center; }
+    .prize { margin: 0; padding: 13px 12px; border-left: 3px solid var(--accent); background: var(--accent-soft); color: var(--accent); font-family: var(--serif); font-size: 13px; line-height: 1.8; text-align: center; }
+    .prize strong { font-weight: 700; }
     .upload-form { padding-top: 24px; }
     .field-label { display: block; margin-bottom: 8px; color: var(--ink); font-size: 13px; }
     .name-input { width: 100%; min-height: 48px; padding: 0 13px; border: 1px solid var(--line); border-radius: 0; background: white; color: var(--ink); font-size: 14px; }
+    .name-note { margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
     .name-input:focus, .file-picker:focus-visible, .submit-button:focus-visible, .back-link:focus-visible { outline: 3px solid #8898c7; outline-offset: 2px; }
     .file-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
     .file-picker { display: flex; min-height: 58px; align-items: center; justify-content: center; gap: 9px; margin-top: 13px; border: 1px dashed #aeb8d3; color: var(--accent); cursor: pointer; font-size: 13px; }
@@ -51,6 +56,7 @@
     .submit-button { width: 100%; min-height: 50px; margin-top: 20px; border: 0; background: var(--accent); color: white; cursor: pointer; font-size: 14px; transition: background .2s; }
     .submit-button:hover { background: #304987; }
     .submit-button:disabled { background: #aab3ca; cursor: wait; }
+    .upload-form.is-closed .file-picker { opacity: .5; pointer-events: none; }
     .status { min-height: 24px; margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: center; overflow-wrap: anywhere; }
     .footer { margin-top: 32px; color: var(--muted); font-family: var(--serif); font-size: 11px; text-align: center; }
     @media (min-width: 700px) { body { padding: 32px 0; } .page { min-height: calc(100vh - 64px); box-shadow: 0 18px 70px rgb(61 45 30 / 16%); } }
@@ -62,7 +68,9 @@
     <header class="upload-header">
       <p class="eyebrow">GUEST MOMENTS</p>
       <h1>소중한 순간을<br>담아주세요!</h1>
+      <img class="upload-hero" src="images/촌캉스.jpg" alt="은호의 촌캉스 사진">
       <p class="intro">돌잔치에서 찍으신 사진과 영상을<br>아래에서 공유해주세요.<br>감사한 마음으로 소중히 간직하겠습니다.</p>
+      <p class="deadline-note">업로드 가능 기간: 2026년 12월 15일까지</p>
     </header>
 
     <section aria-labelledby="prompts-title">
@@ -73,12 +81,13 @@
         <div class="photo-prompt"><strong>가족과 함께하는 순간</strong>소중한 분들과 함께한 모습도 좋아요.</div>
         <div class="photo-prompt"><strong>뜻밖의 귀여운 순간</strong>웃거나 장난치는 순간도 좋아요.</div>
       </div>
-      <p class="prize">예쁜 사진을 많이 올려주신 분들 중 세 분을 추첨해 경품을 드립니다!</p>
+      <p class="prize">예쁜 사진을 많이 올려주신 분들 중 <strong>세 분을 추첨해 경품을 드립니다!</strong></p>
     </section>
 
     <form class="upload-form" id="upload-form">
       <label class="field-label" for="uploader-name">성함</label>
-      <input class="name-input" id="uploader-name" name="name" type="text" autocomplete="name" maxlength="50" placeholder="성함을 입력해주세요" required>
+      <input class="name-input" id="uploader-name" name="name" type="text" autocomplete="name" maxlength="50" placeholder="예: 홍길동 1234" required>
+      <p class="name-note">동명이인 확인을 위해 성함과 전화번호 뒤 4자리를 함께 입력해주세요.</p>
       <label class="file-picker" for="media-files"><span aria-hidden="true">＋</span> 사진·영상 선택하기</label>
       <input class="file-input" id="media-files" type="file" accept="image/*,video/*" multiple>
       <p class="file-note">한 번에 최대 100개까지 선택할 수 있어요.<br>사진과 영상은 파일당 20MB 이하로 올려주세요.</p>
@@ -90,7 +99,8 @@
   </main>
 
   <script>
-    const UPLOAD_ENDPOINT = "";
+    const UPLOAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbzIHVftfbVmibfFUCy8xuLT1GHBKZQb7mRcM5jKYVIfrTgT_NE-OOWDqBSmPGLLE7E/exec";
+    const UPLOAD_DEADLINE = "2026-12-15";
     const MAX_FILE_SIZE = 20 * 1024 * 1024;
     const MAX_FILES = 100;
     const form = document.querySelector("#upload-form");
@@ -100,6 +110,31 @@
     const uploadButton = document.querySelector("#upload-button");
     const uploadStatus = document.querySelector("#upload-status");
     const allowedTypes = /^(image\/|video\/)/;
+
+    function getSeoulDate(date = new Date()) {
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Seoul",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(date);
+      const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+      return `${values.year}-${values.month}-${values.day}`;
+    }
+
+    function closeUpload() {
+      form.classList.add("is-closed");
+      uploaderName.disabled = true;
+      fileInput.disabled = true;
+      uploadButton.disabled = true;
+      uploadStatus.textContent = "업로드 기간이 종료되었습니다.";
+    }
+
+    function isUploadOpen(date = new Date()) {
+      return getSeoulDate(date) <= UPLOAD_DEADLINE;
+    }
+
+    if (!isUploadOpen()) closeUpload();
 
     fileInput.addEventListener("change", () => {
       const files = Array.from(fileInput.files || []);
@@ -113,6 +148,10 @@
 
     form.addEventListener("submit", async event => {
       event.preventDefault();
+      if (!isUploadOpen()) {
+        closeUpload();
+        return;
+      }
       const files = Array.from(fileInput.files || []);
       const name = uploaderName.value.trim();
       if (!name) {
@@ -164,7 +203,7 @@
           uploadStatus.textContent = `${file.name} 업로드에 실패했습니다. 네트워크 연결을 확인해주세요.`;
         }
       }
-      if (completed) uploadStatus.textContent = `${completed}개 파일의 업로드 요청을 보냈습니다. 감사합니다!`;
+      if (completed) uploadStatus.textContent = "전송이 완료되었습니다.";
       uploadButton.disabled = false;
       fileInput.value = "";
       fileList.replaceChildren();

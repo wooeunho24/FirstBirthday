@@ -35,13 +35,20 @@
     }
     a { color: inherit; }
     button, input { font: inherit; }
-    .page { width: min(100%, 520px); margin: 0 auto; overflow: hidden; background: var(--paper); }
+    .page { position: relative; width: min(100%, 520px); margin: 0 auto; overflow: hidden; background: var(--paper); }
     .hero { padding: 36px 0 0; background: var(--paper); text-align: center; }
     .hero-copy { padding: 0 20px 22px; }
     .eyebrow { margin: 0 0 5px; color: var(--accent); font-size: 11px; letter-spacing: .16em; }
     h1 { margin: 0; color: var(--accent); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.25; }
     .hero-korean { margin: 5px 0 0; color: var(--ink); font-family: var(--serif); font-size: 16px; }
     .hero img { display: block; width: calc(100% - 36px); aspect-ratio: 1 / 1.08; margin: 0 auto; object-fit: cover; object-position: 50% 42%; }
+    .music-toggle { position: absolute; z-index: 2; top: 12px; right: 12px; display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgb(255 255 255 / 76%); border-radius: 50%; background: var(--accent); color: white; cursor: pointer; }
+    .music-toggle:hover { background: #304987; }
+    .music-toggle:focus-visible { outline: 3px solid #7487c0; outline-offset: 3px; }
+    .music-icon { display: block; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+    .music-icon-off { display: none; }
+    .music-toggle[aria-pressed="false"] .music-icon-on { display: none; }
+    .music-toggle[aria-pressed="false"] .music-icon-off { display: block; }
     .hero-date { display: flex; justify-content: center; gap: 12px; margin: 0; padding: 17px 12px; color: var(--accent); font-size: 13px; letter-spacing: .03em; }
     .hero-date span + span { padding-left: 12px; border-left: 1px solid var(--line); }
     .intro { padding: 58px 28px 54px; text-align: center; background: var(--section); }
@@ -113,6 +120,10 @@
 </head>
 <body>
   <main class="page">
+    <button class="music-toggle" id="music-toggle" type="button" aria-label="배경음악 켜기" aria-pressed="false" title="배경음악 켜기">
+      <svg class="music-icon music-icon-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+      <svg class="music-icon music-icon-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle><path d="M4 4l16 16"></path></svg>
+    </button>
     <header class="hero">
       <div class="hero-copy">
         <p class="eyebrow">A LITTLE MIRACLE, ONE YEAR</p>
@@ -200,8 +211,47 @@
     <footer class="footer">함께 축하해 주셔서 고맙습니다</footer>
   </main>
 
+  <audio id="background-music" src="music/song.mp3" preload="auto" loop></audio>
+
   <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://t1.kakaocdn.net/kakaomapweb/roughmap/loader/prod/roughmapLoader.js"></script>
   <script>
+    const backgroundMusic = document.querySelector("#background-music");
+    const musicToggle = document.querySelector("#music-toggle");
+    let musicEnabled = false;
+    let musicRequest = 0;
+
+    function updateMusicToggle(isPlaying) {
+      musicToggle.setAttribute("aria-pressed", String(isPlaying));
+      const label = isPlaying ? "배경음악 끄기" : "배경음악 켜기";
+      musicToggle.setAttribute("aria-label", label);
+      musicToggle.setAttribute("title", label);
+    }
+
+    function setMusicEnabled(enabled) {
+      const request = ++musicRequest;
+      musicEnabled = enabled;
+      updateMusicToggle(enabled);
+      if (!enabled) {
+        backgroundMusic.pause();
+        return;
+      }
+
+      backgroundMusic.play().then(() => {
+        if (request === musicRequest) {
+          musicEnabled = true;
+          updateMusicToggle(true);
+        }
+      }).catch(() => {
+        if (request === musicRequest) {
+          musicEnabled = false;
+          updateMusicToggle(false);
+        }
+      });
+    }
+
+    musicToggle.addEventListener("click", () => setMusicEnabled(!musicEnabled));
+    setMusicEnabled(true);
+
     const mapContainer = document.querySelector("#daumRoughmapContainer1793107558171");
     const mapWidth = Math.min(640, Math.round(mapContainer.getBoundingClientRect().width));
     const mapHeight = Math.round(mapWidth * 360 / 640);
