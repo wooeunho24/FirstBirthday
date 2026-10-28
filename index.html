@@ -20,7 +20,7 @@
     :root {
       color-scheme: light;
       --paper: #fffaf0;
-      --section: #f7f3e9;
+      --section: #fffaf0;
       --ink: #343640;
       --muted: #777b86;
       --accent: #4059a6;
@@ -49,9 +49,9 @@
     h1 { margin: 0; color: var(--accent); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.25; }
     .hero-korean { margin: 5px 0 0; color: var(--ink); font-family: var(--serif); font-size: 16px; }
     .hero img { display: block; width: calc(100% - 36px); aspect-ratio: 1 / 1.08; margin: 0 auto; object-fit: cover; object-position: 50% 42%; }
-    .music-toggle { position: absolute; z-index: 2; top: 12px; right: 12px; display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgb(255 255 255 / 76%); border-radius: 50%; background: var(--accent); color: white; cursor: pointer; }
+    .music-toggle { position: fixed; z-index: 20; top: max(12px, calc(env(safe-area-inset-top, 0px) + 12px)); right: max(12px, calc((100vw - 520px) / 2 + 12px)); display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgb(255 255 255 / 85%); border-radius: 50%; background: var(--accent); color: white; cursor: pointer; box-shadow: 0 3px 12px rgb(43 67 102 / 20%); }
     .music-toggle:hover { background: #304987; }
-    .music-toggle:focus-visible { outline: 3px solid #7487c0; outline-offset: 3px; }
+    .music-toggle:focus-visible { outline: 3px solid #9aafd2; outline-offset: 3px; }
     .music-icon { display: block; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
     .music-icon-off { display: none; }
     .music-toggle[aria-pressed="false"] .music-icon-on { display: none; }
@@ -62,16 +62,16 @@
     .section-label { margin: 0 0 16px; color: var(--accent); font-size: 11px; letter-spacing: .16em; }
     .intro h2, .section-heading { margin: 0; font-family: var(--serif); font-size: 25px; font-weight: 400; line-height: 1.7; }
     .intro-copy { margin: 19px 0 0; color: var(--muted); font-size: 14px; line-height: 2; }
-    .family-line { display: flex; justify-content: center; gap: 7px; margin: 22px 0 0; color: var(--ink); font-family: var(--serif); font-size: 14px; }
-    .family-line span { color: var(--accent); font-family: var(--sans); font-size: 11px; }
+    .family-line { display: flex; justify-content: center; gap: 7px; margin: 22px 0 0; color: var(--ink); font-family: var(--serif); font-size: 15px; }
+    .family-line span { color: var(--accent); font-family: var(--sans); font-size: 13px; font-weight: 700; }
     .divider { width: 38px; height: 1px; margin: 26px auto 0; background: var(--line); }
-    .calendar-section { padding: 58px 28px 62px; text-align: center; }
+    .calendar-section { padding: 58px 28px 62px; text-align: center; background: var(--section); }
     .calendar-section .section-label { margin-bottom: 10px; }
     .calendar-title { margin: 0 0 22px; color: var(--accent); font-family: var(--display); font-size: 29px; font-weight: 400; }
     .calendar { width: 100%; max-width: 350px; margin: 0 auto; border-collapse: collapse; table-layout: fixed; }
     .calendar caption { padding: 0 0 12px; color: var(--ink); font-family: var(--serif); font-size: 17px; }
     .calendar th { height: 37px; color: var(--muted); font-size: 11px; font-weight: 400; }
-    .calendar td { height: 42px; color: #625a51; font-size: 13px; }
+    .calendar td { height: 42px; color: var(--muted); font-size: 13px; }
     .calendar th:first-child, .calendar td:first-child { color: var(--accent); }
     .calendar .birthday { color: white; font-weight: 700; }
     .calendar .birthday span { display: grid; width: 29px; height: 29px; margin: 0 auto; place-items: center; border-radius: 50%; background: var(--accent); color: #fff; }
@@ -82,10 +82,26 @@
     .gallery-heading h2 { margin: 0; font-family: var(--serif); font-size: 21px; font-weight: 400; }
     .gallery-note { color: var(--muted); font-size: 11px; }
     .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-    .photo-grid img { display: block; width: 100%; height: 210px; object-fit: cover; }
+    .photo-grid img { display: block; width: 100%; height: 210px; object-fit: cover; cursor: zoom-in; }
+    .photo-grid img:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
     .photo-grid img:nth-child(2) { object-position: 50% 40%; }
     .photo-grid img:nth-child(3) { object-position: 50% 35%; }
     .photo-grid img:nth-child(4) { object-position: 50% 35%; }
+    .gallery-viewer { position: fixed; inset: 0; width: auto; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; background: #182238; color: white; overflow: hidden; }
+    .gallery-viewer::backdrop { background: rgb(18 28 45 / 94%); }
+    .gallery-viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+    .viewer-toolbar { display: flex; min-height: 60px; align-items: center; justify-content: space-between; padding: max(10px, env(safe-area-inset-top)) 16px 8px; }
+    .viewer-count { color: rgb(255 255 255 / 78%); font-size: 13px; font-variant-numeric: tabular-nums; }
+    .viewer-control { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgb(255 255 255 / 24%); border-radius: 50%; background: rgb(255 255 255 / 9%); color: white; cursor: pointer; }
+    .viewer-control:hover { background: rgb(255 255 255 / 18%); }
+    .viewer-control:focus-visible { outline: 3px solid white; outline-offset: 2px; }
+    .viewer-control svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+    .viewer-stage { position: relative; display: grid; min-height: 0; place-items: center; touch-action: pan-y; }
+    .viewer-image { display: block; max-width: calc(100vw - 112px); max-height: calc(100dvh - 132px); object-fit: contain; user-select: none; -webkit-user-drag: none; }
+    .viewer-arrow { position: absolute; top: 50%; transform: translateY(-50%); }
+    .viewer-previous { left: 12px; }
+    .viewer-next { right: 12px; }
+    .viewer-caption { min-height: 44px; margin: 0; padding: 9px 16px max(12px, env(safe-area-inset-bottom)); color: rgb(255 255 255 / 78%); font-size: 12px; text-align: center; }
     .location { padding: 58px 22px 58px; background: var(--section); }
     .location .section-label, .location .section-heading { text-align: center; }
     .location .section-label { margin-bottom: 12px; }
@@ -108,12 +124,15 @@
     .upload-prize { max-width: 350px; margin: 0 auto 24px; padding: 12px 8px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--accent); font-family: var(--serif); font-size: 13px; line-height: 1.8; }
     .upload-button { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 9px; padding: 0 23px; border: 0; background: var(--accent); color: white; cursor: pointer; font-size: 14px; text-decoration: none; transition: background .2s, transform .2s; }
     .upload-button:hover { transform: translateY(-2px); background: #304987; }
-    .upload-button:focus-visible, .map-link:focus-visible { outline: 3px solid #7487c0; outline-offset: 3px; }
+    .upload-button:focus-visible, .map-link:focus-visible { outline: 3px solid #9aafd2; outline-offset: 3px; }
     .upload-icon { font-size: 18px; line-height: 1; }
     .footer { padding: 20px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--serif); font-size: 12px; text-align: center; }
+    html.scroll-reveal-ready [data-scroll-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s cubic-bezier(.2, .7, .2, 1); }
+    html.scroll-reveal-ready [data-scroll-reveal].is-visible { opacity: 1; transform: translateY(0); }
     @media (min-width: 700px) {
-      body { padding: 32px 0; background-color: #edf0f7; background-image: radial-gradient(ellipse at 15% 15%, rgb(255 255 255 / 70%), transparent 35%), radial-gradient(ellipse at 90% 85%, rgb(126 145 185 / 11%), transparent 40%); }
-      .page { box-shadow: 0 18px 70px rgb(61 45 30 / 16%); }
+      body { padding: 32px 0; background-color: #edf0f7; background-image: radial-gradient(ellipse at 50% 0%, rgb(255 255 255 / 72%), transparent 50%); }
+      .page { box-shadow: 0 18px 70px rgb(43 57 81 / 12%); }
+      .music-toggle { top: 44px; }
     }
     @media (max-width: 360px) {
       .hero { padding-top: 30px; }
@@ -124,6 +143,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      html.scroll-reveal-ready [data-scroll-reveal] { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -134,16 +154,16 @@
       <svg class="music-icon music-icon-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle><path d="M4 4l16 16"></path></svg>
     </button>
     <header class="hero">
-      <div class="hero-copy">
+      <div class="hero-copy" data-scroll-reveal>
         <p class="eyebrow">A LITTLE MIRACLE, ONE YEAR</p>
         <h1>First Birthday</h1>
         <p class="hero-korean">우은호의 첫 번째 생일에 초대합니다</p>
       </div>
-      <img src="images/서있는것.jpg" alt="한복을 입고 환하게 웃는 아기의 사진">
+      <img src="images/서있는것.jpg" alt="한복을 입고 환하게 웃는 아기의 사진" data-scroll-reveal>
       <p class="hero-date"><span>2026년 12월 13일 일요일</span><span>오후 12시</span></p>
     </header>
 
-    <section class="intro" aria-labelledby="intro-title">
+    <section class="intro" aria-labelledby="intro-title" data-scroll-reveal>
       <p class="section-label">WITH LOVE</p>
       <h2 id="intro-title">작은 손을 잡고 걸어온<br>첫 번째 계절</h2>
       <p class="intro-copy">사랑과 웃음으로 채워온 첫돌을 맞아<br>소중한 분들을 모시고 감사의 마음을 나누려 합니다.<br>함께해 주시면 큰 기쁨이 되겠습니다.</p>
@@ -151,7 +171,7 @@
       <div class="divider" aria-hidden="true"></div>
     </section>
 
-    <section class="calendar-section" aria-labelledby="calendar-title">
+    <section class="calendar-section" aria-labelledby="calendar-title" data-scroll-reveal>
       <p class="section-label">PLEASE SAVE THE DATE</p>
       <h2 class="calendar-title" id="calendar-title">돌잔치 안내</h2>
       <table class="calendar">
@@ -173,23 +193,7 @@
       <p class="event-summary">2026년 12월 13일 일요일<br>오후 12시</p>
     </section>
 
-    <section class="gallery" aria-labelledby="gallery-title">
-      <div class="gallery-heading">
-        <div>
-          <p class="section-label">OUR LITTLE MOMENTS</p>
-          <h2 id="gallery-title">함께 자란 시간</h2>
-        </div>
-        <span class="gallery-note">a year of love</span>
-      </div>
-      <div class="photo-grid">
-        <img src="images/앉기.jpg" alt="돌잔치 한복을 입은 아기" loading="lazy">
-        <img src="images/연주.jpg" alt="아기의 사랑스러운 순간" loading="lazy">
-        <img src="images/촌캉스.jpg" alt="즐거운 시간을 보내는 아기" loading="lazy">
-        <img src="images/서있는것.jpg" alt="환하게 웃는 아기" loading="lazy">
-      </div>
-    </section>
-
-    <section class="location" aria-labelledby="location-title">
+    <section class="location" aria-labelledby="location-title" data-scroll-reveal>
       <p class="section-label">COME AND CELEBRATE</p>
       <h2 class="section-heading" id="location-title">오시는 길</h2>
       <p class="venue-name">호텔 라뷔포레 웨딩</p>
@@ -211,7 +215,42 @@
       </div>
     </section>
 
-    <section class="upload" aria-labelledby="upload-title">
+    <section class="gallery" aria-labelledby="gallery-title" data-scroll-reveal>
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">OUR LITTLE MOMENTS</p>
+          <h2 id="gallery-title">갤러리</h2>
+        </div>
+        <span class="gallery-note">사진을 누르면 크게 볼 수 있어요</span>
+      </div>
+      <div class="photo-grid">
+        <img src="images/앉기.jpg" loading="lazy">
+        <img src="images/연주.jpg" loading="lazy">
+        <img src="images/촌캉스.jpg" loading="lazy">
+        <img src="images/공부.jpg" loading="lazy">
+      </div>
+    </section>
+
+    <dialog class="gallery-viewer" id="gallery-viewer" aria-label="갤러리 사진 보기">
+      <div class="viewer-toolbar">
+        <span class="viewer-count" id="viewer-count" aria-live="polite"></span>
+        <button class="viewer-control" id="viewer-close" type="button" aria-label="사진 크게 보기 닫기" title="닫기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <div class="viewer-stage" id="viewer-stage">
+        <button class="viewer-control viewer-arrow viewer-previous" id="viewer-previous" type="button" aria-label="이전 사진" title="이전 사진">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+        </button>
+        <img class="viewer-image" id="viewer-image" alt="">
+        <button class="viewer-control viewer-arrow viewer-next" id="viewer-next" type="button" aria-label="다음 사진" title="다음 사진">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+      </div>
+      <p class="viewer-caption" id="viewer-caption"></p>
+    </dialog>
+
+    <section class="upload" aria-labelledby="upload-title" data-scroll-reveal>
       <p class="section-label">GUEST MOMENTS</p>
       <h2 class="section-heading" id="upload-title">은호의 첫돌 순간을<br>함께 기록해주세요</h2>
       <p class="upload-copy">사진과 영상으로 함께한 순간을 보내주세요.<br>소중한 추억으로 간직하겠습니다.</p>
@@ -285,6 +324,85 @@
       mapWidth: String(mapWidth),
       mapHeight: String(mapHeight)
     }).render();
+
+    const galleryImages = Array.from(document.querySelectorAll(".photo-grid img"));
+    const galleryViewer = document.querySelector("#gallery-viewer");
+    const viewerImage = document.querySelector("#viewer-image");
+    const viewerCount = document.querySelector("#viewer-count");
+    const viewerCaption = document.querySelector("#viewer-caption");
+    let activeGalleryIndex = 0;
+    let swipeStartX = null;
+
+    function showGalleryImage(index) {
+      activeGalleryIndex = (index + galleryImages.length) % galleryImages.length;
+      const sourceImage = galleryImages[activeGalleryIndex];
+      viewerImage.src = sourceImage.currentSrc || sourceImage.src;
+      viewerImage.alt = sourceImage.alt;
+      viewerCaption.textContent = sourceImage.alt;
+      viewerCount.textContent = `${activeGalleryIndex + 1} / ${galleryImages.length}`;
+    }
+
+    function openGallery(index) {
+      showGalleryImage(index);
+      galleryViewer.showModal();
+      document.querySelector("#viewer-close").focus();
+    }
+
+    galleryImages.forEach((image, index) => {
+      image.tabIndex = 0;
+      image.setAttribute("role", "button");
+      image.setAttribute("aria-label", `${image.alt}, 크게 보기`);
+      image.addEventListener("click", () => openGallery(index));
+      image.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openGallery(index);
+        }
+      });
+    });
+
+    document.querySelector("#viewer-close").addEventListener("click", () => galleryViewer.close());
+    document.querySelector("#viewer-previous").addEventListener("click", () => showGalleryImage(activeGalleryIndex - 1));
+    document.querySelector("#viewer-next").addEventListener("click", () => showGalleryImage(activeGalleryIndex + 1));
+    galleryViewer.addEventListener("click", event => {
+      if (event.target === galleryViewer) galleryViewer.close();
+    });
+    galleryViewer.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        galleryViewer.close();
+        return;
+      }
+      if (event.key === "ArrowLeft") showGalleryImage(activeGalleryIndex - 1);
+      if (event.key === "ArrowRight") showGalleryImage(activeGalleryIndex + 1);
+    });
+    const viewerStage = document.querySelector("#viewer-stage");
+    viewerStage.addEventListener("pointerdown", event => {
+      if (!event.target.closest("button")) swipeStartX = event.clientX;
+    });
+    viewerStage.addEventListener("pointerup", event => {
+      if (swipeStartX === null) return;
+      const distance = event.clientX - swipeStartX;
+      swipeStartX = null;
+      if (Math.abs(distance) > 48) showGalleryImage(activeGalleryIndex + (distance < 0 ? 1 : -1));
+    });
+    viewerStage.addEventListener("pointercancel", () => { swipeStartX = null; });
+
+    const revealTargets = document.querySelectorAll("[data-scroll-reveal]");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("scroll-reveal-ready");
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -28px 0px" });
+      revealTargets.forEach(target => revealObserver.observe(target));
+    } else {
+      revealTargets.forEach(target => target.classList.add("is-visible"));
+    }
   </script>
 </body>
 </html>
