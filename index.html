@@ -90,15 +90,17 @@
     .location .section-label, .location .section-heading { text-align: center; }
     .location .section-label { margin-bottom: 12px; }
     .venue-name { margin: 16px 0 0; color: var(--accent); font-family: var(--serif); font-size: 18px; text-align: center; }
+    .venue-floor { margin: 5px 0 0; color: var(--ink); font-size: 13px; text-align: center; }
     .address { margin: 7px 0 22px; color: var(--muted); font-size: 13px; line-height: 1.8; text-align: center; }
     .map-frame { position: relative; display: block; width: 100%; overflow: hidden; background: #f0f1f5; }
     .map-frame .root_daum_roughmap { width: 100% !important; }
-    .map-links { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 12px; }
+    .map-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
     .map-link { display: flex; min-height: 48px; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 13px; text-decoration: none; transition: background .2s, transform .2s; }
     .map-link:hover { transform: translateY(-2px); background: white; }
     .map-mark { display: grid; width: 19px; height: 19px; place-items: center; border-radius: 50%; color: white; font-size: 10px; font-weight: 700; }
     .naver-mark { background: #03a65a; }
     .kakao-mark { background: #fae100; color: #3b3326; }
+    .tmap-mark { background: #e84c3d; }
     .upload { padding: 60px 26px 68px; text-align: center; background: var(--section); }
     .upload .section-label { margin-bottom: 12px; }
     .upload .section-heading { font-size: 23px; }
@@ -191,6 +193,7 @@
       <p class="section-label">COME AND CELEBRATE</p>
       <h2 class="section-heading" id="location-title">오시는 길</h2>
       <p class="venue-name">호텔 라뷔포레 웨딩</p>
+      <p class="venue-floor">지하 1층</p>
       <p class="address">경기 수원시 팔달구 권광로134번길 46</p>
       <div class="map-frame" role="application" aria-label="호텔 라뷔포레 웨딩 카카오 지도">
         <div id="daumRoughmapContainer1793107558171" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -202,6 +205,9 @@
         <a class="map-link" href="https://kko.to/qiNaMw1h-O" target="_blank" rel="noopener noreferrer" aria-label="카카오맵으로 길 찾기">
           <span class="map-mark kakao-mark" aria-hidden="true">K</span> 카카오맵
         </a>
+        <a class="map-link" href="https://tmap.life/a71494fc" target="_blank" rel="noopener noreferrer" aria-label="T map으로 길 찾기">
+          <span class="map-mark tmap-mark" aria-hidden="true">T</span> T map
+        </a>
       </div>
     </section>
 
@@ -209,7 +215,7 @@
       <p class="section-label">GUEST MOMENTS</p>
       <h2 class="section-heading" id="upload-title">은호의 첫돌 순간을<br>함께 기록해주세요</h2>
       <p class="upload-copy">사진과 영상으로 함께한 순간을 보내주세요.<br>소중한 추억으로 간직하겠습니다.</p>
-      <p class="upload-prize">예쁜 사진을 많이 올려주신 분들 중 세 분을 추첨해 경품을 드립니다!</p>
+      <p class="upload-prize">예쁜 사진을 많이 올려주신 분들 중<br><strong>세 분을 추첨해 경품을 드립니다!</strong></p>
       <a class="upload-button" href="upload.html">
         <span class="upload-icon" aria-hidden="true">＋</span> 사진 및 영상 전달하기
       </a>

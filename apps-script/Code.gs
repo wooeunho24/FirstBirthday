@@ -1,5 +1,5 @@
 const DRIVE_FOLDER_ID = "1muVdYqtyijGhHhPSpgd2JvMwZJW5Avz7";
-const MAX_FILE_BYTES = 20 * 1024 * 1024;
+const MAX_FILE_BYTES = 100 * 1024 * 1024;
 const UPLOAD_DEADLINE = "2026-12-15";
 
 function doPost(event) {
@@ -23,7 +23,7 @@ function doPost(event) {
 
     const bytes = Utilities.base64Decode(encoded);
     if (bytes.length > MAX_FILE_BYTES) {
-      return respond({ ok: false, error: "파일은 20MB 이하여야 합니다." });
+      return respond({ ok: false, error: "파일은 100MB 이하여야 합니다." });
     }
 
     const blob = Utilities.newBlob(bytes, mimeType, name);
