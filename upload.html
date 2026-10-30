@@ -97,7 +97,7 @@
       <p class="name-note">동명이인 확인을 위해 성함과 전화번호 뒤 4자리를 함께 입력해주세요.</p>
       <label class="file-picker" for="media-files"><span aria-hidden="true">＋</span> 사진·영상 선택하기</label>
       <input class="file-input" id="media-files" type="file" accept="image/*,video/*" multiple>
-      <p class="file-note">한 번에 최대 100개까지 선택할 수 있어요.<br>사진과 영상은 파일당 100MB 이하로 올려주세요.</p>
+      <p class="file-note">한 번에 최대 100개까지 선택할 수 있어요.<br>사진과 영상은 파일당 20MB 이하로 올려주세요.</p>
       <ul class="file-list" id="file-list" aria-live="polite"></ul>
       <div class="progress-group" id="progress-group" hidden>
         <progress class="upload-progress" id="upload-progress" max="1" value="0" aria-label="파일 업로드 진행률"></progress>
@@ -112,7 +112,7 @@
   <script>
     const UPLOAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbzIHVftfbVmibfFUCy8xuLT1GHBKZQb7mRcM5jKYVIfrTgT_NE-OOWDqBSmPGLLE7E/exec";
     const UPLOAD_DEADLINE = "2026-12-15";
-    const MAX_FILE_SIZE = 100 * 1024 * 1024;
+    const MAX_FILE_SIZE = 20 * 1024 * 1024;
     const MAX_FILES = 100;
     const form = document.querySelector("#upload-form");
     const uploaderName = document.querySelector("#uploader-name");
@@ -124,6 +124,7 @@
     const uploadProgress = document.querySelector("#upload-progress");
     const progressLabel = document.querySelector("#progress-label");
     const allowedTypes = /^(image\/|video\/)/;
+    let selectedFiles = [];
 
     function getSeoulDate(date = new Date()) {
       const parts = new Intl.DateTimeFormat("en-CA", {
@@ -151,13 +152,21 @@
     if (!isUploadOpen()) closeUpload();
 
     fileInput.addEventListener("change", () => {
-      const files = Array.from(fileInput.files || []);
-      fileList.replaceChildren(...files.map(file => {
+      const chosenFiles = Array.from(fileInput.files || []);
+      const oversizedFiles = chosenFiles.filter(file => file.size > MAX_FILE_SIZE);
+      selectedFiles = chosenFiles.filter(file => file.size <= MAX_FILE_SIZE);
+      fileInput.value = "";
+      fileList.replaceChildren(...selectedFiles.map(file => {
         const item = document.createElement("li");
         item.textContent = file.name;
         return item;
       }));
-      uploadStatus.textContent = files.length ? `${files.length}개 파일을 선택했습니다.` : "";
+      if (oversizedFiles.length) {
+        const rejectedNames = oversizedFiles.map(file => file.name).join(", ");
+        uploadStatus.textContent = `20MB 초과 파일은 목록에서 제외했습니다: ${rejectedNames}`;
+      } else {
+        uploadStatus.textContent = selectedFiles.length ? `${selectedFiles.length}개 파일을 선택했습니다.` : "";
+      }
     });
 
     form.addEventListener("submit", async event => {
@@ -166,7 +175,7 @@
         closeUpload();
         return;
       }
-      const files = Array.from(fileInput.files || []);
+      const files = selectedFiles;
       const name = uploaderName.value.trim();
       if (!name) {
         uploadStatus.textContent = "성함을 입력해주세요.";
@@ -175,16 +184,16 @@
       }
       if (!files.length) {
         uploadStatus.textContent = "먼저 사진이나 영상을 선택해주세요.";
-        fileInput.focus();
+        document.querySelector(".file-picker").focus();
         return;
       }
       if (files.length > MAX_FILES) {
         uploadStatus.textContent = `한 번에 최대 ${MAX_FILES}개까지 올릴 수 있습니다.`;
         return;
       }
-      const invalidFile = files.find(file => !allowedTypes.test(file.type) || file.size > MAX_FILE_SIZE);
+      const invalidFile = files.find(file => !allowedTypes.test(file.type));
       if (invalidFile) {
-        uploadStatus.textContent = `${invalidFile.name}: 사진·영상 파일, 파일당 100MB 이하만 올릴 수 있습니다.`;
+        uploadStatus.textContent = `${invalidFile.name}: 사진 또는 영상 파일만 올릴 수 있습니다.`;
         return;
       }
       if (!UPLOAD_ENDPOINT) {
@@ -235,7 +244,7 @@
         uploadStatus.textContent = "전송이 완료되었습니다.";
       }
       uploadButton.disabled = false;
-      fileInput.value = "";
+      selectedFiles = [];
       fileList.replaceChildren();
     });
   </script>
