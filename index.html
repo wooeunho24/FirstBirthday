@@ -38,6 +38,8 @@
       background: #edf0f7;
       color: var(--ink);
       font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; }
@@ -45,9 +47,9 @@
     .page { position: relative; width: min(100%, 520px); margin: 0 auto; overflow: hidden; background: var(--paper); }
     .hero { padding: 36px 0 0; background: var(--paper); text-align: center; }
     .hero-copy { padding: 0 20px 22px; }
-    .eyebrow { margin: 0 0 5px; color: var(--accent); font-size: 11px; letter-spacing: .16em; }
+    .eyebrow { margin: 0 0 5px; color: var(--accent); font-size: 14px; letter-spacing: .08em; }
     h1 { margin: 0; color: var(--accent); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.25; }
-    .hero-korean { margin: 5px 0 0; color: var(--ink); font-family: var(--serif); font-size: 16px; }
+    .hero-korean { margin: 5px 0 0; color: var(--ink); font-family: var(--serif); font-size: 19px; }
     .hero img { display: block; width: calc(100% - 36px); aspect-ratio: 1 / 1.08; margin: 0 auto; object-fit: cover; object-position: 50% 42%; }
     .music-toggle { position: fixed; z-index: 20; top: max(12px, calc(env(safe-area-inset-top, 0px) + 12px)); right: max(12px, calc((100vw - 520px) / 2 + 12px)); display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgb(255 255 255 / 85%); border-radius: 50%; background: var(--accent); color: white; cursor: pointer; box-shadow: 0 3px 12px rgb(43 67 102 / 20%); }
     .music-toggle:hover { background: #304987; }
@@ -56,31 +58,31 @@
     .music-icon-off { display: none; }
     .music-toggle[aria-pressed="false"] .music-icon-on { display: none; }
     .music-toggle[aria-pressed="false"] .music-icon-off { display: block; }
-    .hero-date { display: flex; justify-content: center; gap: 12px; margin: 0; padding: 17px 12px; color: var(--accent); font-size: 13px; letter-spacing: .03em; }
+    .hero-date { display: flex; justify-content: center; gap: 12px; margin: 0; padding: 17px 12px; color: var(--accent); font-size: 17px; line-height: 1.5; }
     .hero-date span + span { padding-left: 12px; border-left: 1px solid var(--line); }
     .intro { padding: 58px 28px 54px; text-align: center; background: var(--section); }
-    .section-label { margin: 0 0 16px; color: var(--accent); font-size: 11px; letter-spacing: .16em; }
-    .intro h2, .section-heading { margin: 0; font-family: var(--serif); font-size: 25px; font-weight: 400; line-height: 1.7; }
-    .intro-copy { margin: 19px 0 0; color: var(--muted); font-size: 14px; line-height: 2; }
-    .family-line { display: flex; justify-content: center; gap: 7px; margin: 22px 0 0; color: var(--ink); font-family: var(--serif); font-size: 15px; }
-    .family-line span { color: var(--accent); font-family: var(--sans); font-size: 13px; font-weight: 700; }
+    .section-label { margin: 0 0 16px; color: var(--accent); font-size: 14px; letter-spacing: .06em; }
+    .intro h2, .section-heading { margin: 0; font-family: var(--serif); font-size: 28px; font-weight: 400; line-height: 1.6; }
+    .intro-copy { margin: 19px 0 0; color: var(--muted); font-size: 17px; line-height: 1.8; }
+    .family-line { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; color: var(--ink); font-family: var(--serif); font-size: 17px; }
+    .family-line span { color: var(--accent); font-family: var(--sans); font-size: 15px; font-weight: 700; }
     .divider { width: 38px; height: 1px; margin: 26px auto 0; background: var(--line); }
     .calendar-section { padding: 58px 28px 62px; text-align: center; background: var(--section); }
     .calendar-section .section-label { margin-bottom: 10px; }
-    .calendar-title { margin: 0 0 22px; color: var(--accent); font-family: var(--display); font-size: 29px; font-weight: 400; }
+    .calendar-title { margin: 0 0 22px; color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 400; }
     .calendar { width: 100%; max-width: 350px; margin: 0 auto; border-collapse: collapse; table-layout: fixed; }
-    .calendar caption { padding: 0 0 12px; color: var(--ink); font-family: var(--serif); font-size: 17px; }
-    .calendar th { height: 37px; color: var(--muted); font-size: 11px; font-weight: 400; }
-    .calendar td { height: 42px; color: var(--muted); font-size: 13px; }
+    .calendar caption { padding: 0 0 12px; color: var(--ink); font-family: var(--serif); font-size: 20px; }
+    .calendar th { height: 42px; color: var(--muted); font-size: 15px; font-weight: 400; }
+    .calendar td { height: 46px; color: var(--muted); font-size: 16px; }
     .calendar th:first-child, .calendar td:first-child { color: var(--accent); }
     .calendar .birthday { color: white; font-weight: 700; }
     .calendar .birthday span { display: grid; width: 29px; height: 29px; margin: 0 auto; place-items: center; border-radius: 50%; background: var(--accent); color: #fff; }
-    .event-summary { margin: 22px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .event-summary { margin: 22px 0 0; color: var(--ink); font-size: 18px; line-height: 1.8; }
     .gallery { padding: 5px 22px 68px; }
     .gallery-heading { display: flex; align-items: end; justify-content: space-between; margin: 0 3px 17px; }
     .gallery-heading .section-label { margin: 0 0 6px; }
-    .gallery-heading h2 { margin: 0; font-family: var(--serif); font-size: 21px; font-weight: 400; }
-    .gallery-note { color: var(--muted); font-size: 11px; }
+    .gallery-heading h2 { margin: 0; font-family: var(--serif); font-size: 25px; font-weight: 400; }
+    .gallery-note { color: var(--muted); font-size: 14px; }
     .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
     .photo-grid img { display: block; width: 100%; height: 210px; object-fit: cover; cursor: zoom-in; }
     .photo-grid img:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
@@ -91,7 +93,7 @@
     .gallery-viewer::backdrop { background: rgb(18 28 45 / 94%); }
     .gallery-viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
     .viewer-toolbar { display: flex; min-height: 60px; align-items: center; justify-content: space-between; padding: max(10px, env(safe-area-inset-top)) 16px 8px; }
-    .viewer-count { color: rgb(255 255 255 / 78%); font-size: 13px; font-variant-numeric: tabular-nums; }
+    .viewer-count { color: rgb(255 255 255 / 88%); font-size: 16px; font-variant-numeric: tabular-nums; }
     .viewer-control { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgb(255 255 255 / 24%); border-radius: 50%; background: rgb(255 255 255 / 9%); color: white; cursor: pointer; }
     .viewer-control:hover { background: rgb(255 255 255 / 18%); }
     .viewer-control:focus-visible { outline: 3px solid white; outline-offset: 2px; }
@@ -101,32 +103,32 @@
     .viewer-arrow { position: absolute; top: 50%; transform: translateY(-50%); }
     .viewer-previous { left: 12px; }
     .viewer-next { right: 12px; }
-    .viewer-caption { min-height: 44px; margin: 0; padding: 9px 16px max(12px, env(safe-area-inset-bottom)); color: rgb(255 255 255 / 78%); font-size: 12px; text-align: center; }
+    .viewer-caption { min-height: 50px; margin: 0; padding: 9px 16px max(12px, env(safe-area-inset-bottom)); color: rgb(255 255 255 / 92%); font-size: 16px; text-align: center; }
     .location { padding: 58px 22px 58px; background: var(--section); }
     .location .section-label, .location .section-heading { text-align: center; }
     .location .section-label { margin-bottom: 12px; }
-    .venue-name { margin: 16px 0 0; color: var(--accent); font-family: var(--serif); font-size: 18px; text-align: center; }
-    .venue-floor { margin: 5px 0 0; color: var(--ink); font-size: 13px; text-align: center; }
-    .address { margin: 7px 0 22px; color: var(--muted); font-size: 13px; line-height: 1.8; text-align: center; }
+    .venue-name { margin: 18px 0 0; color: var(--accent); font-family: var(--serif); font-size: 25px; line-height: 1.5; text-align: center; }
+    .venue-floor { margin: 6px 0 0; color: var(--ink); font-size: 18px; text-align: center; }
+    .address { margin: 9px 0 22px; color: var(--muted); font-size: 17px; line-height: 1.7; text-align: center; }
     .map-frame { position: relative; display: block; width: 100%; overflow: hidden; background: #f0f1f5; }
     .map-frame .root_daum_roughmap { width: 100% !important; }
     .map-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
-    .map-link { display: flex; min-height: 48px; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 13px; text-decoration: none; transition: background .2s, transform .2s; }
+    .map-link { display: flex; min-height: 56px; align-items: center; justify-content: center; gap: 5px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 14px; line-height: 1.3; text-align: center; text-decoration: none; transition: background .2s, transform .2s; }
     .map-link:hover { transform: translateY(-2px); background: white; }
-    .map-mark { display: grid; width: 19px; height: 19px; place-items: center; border-radius: 50%; color: white; font-size: 10px; font-weight: 700; }
+    .map-mark { display: grid; flex: 0 0 22px; width: 22px; height: 22px; place-items: center; border-radius: 50%; color: white; font-size: 12px; font-weight: 700; }
     .naver-mark { background: #03a65a; }
     .kakao-mark { background: #fae100; color: #3b3326; }
     .tmap-mark { background: #e84c3d; }
     .upload { padding: 60px 26px 68px; text-align: center; background: var(--section); }
     .upload .section-label { margin-bottom: 12px; }
-    .upload .section-heading { font-size: 23px; }
-    .upload-copy { margin: 13px 0 23px; color: var(--muted); font-size: 13px; line-height: 1.8; }
-    .upload-prize { max-width: 350px; margin: 0 auto 24px; padding: 12px 8px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--accent); font-family: var(--serif); font-size: 13px; line-height: 1.8; }
-    .upload-button { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 9px; padding: 0 23px; border: 0; background: var(--accent); color: white; cursor: pointer; font-size: 14px; text-decoration: none; transition: background .2s, transform .2s; }
+    .upload .section-heading { font-size: 27px; }
+    .upload-copy { margin: 13px 0 23px; color: var(--muted); font-size: 17px; line-height: 1.7; }
+    .upload-prize { max-width: 350px; margin: 0 auto 24px; padding: 14px 10px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--accent); font-family: var(--serif); font-size: 17px; line-height: 1.7; }
+    .upload-button { display: inline-flex; min-height: 56px; align-items: center; justify-content: center; gap: 9px; padding: 0 23px; border: 0; background: var(--accent); color: white; cursor: pointer; font-size: 17px; text-decoration: none; transition: background .2s, transform .2s; }
     .upload-button:hover { transform: translateY(-2px); background: #304987; }
     .upload-button:focus-visible, .map-link:focus-visible { outline: 3px solid #9aafd2; outline-offset: 3px; }
     .upload-icon { font-size: 18px; line-height: 1; }
-    .footer { padding: 20px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--serif); font-size: 12px; text-align: center; }
+    .footer { padding: 20px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--serif); font-size: 15px; text-align: center; }
     html.scroll-reveal-ready [data-scroll-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s cubic-bezier(.2, .7, .2, 1); }
     html.scroll-reveal-ready [data-scroll-reveal].is-visible { opacity: 1; transform: translateY(0); }
     @media (min-width: 700px) {
@@ -137,7 +139,7 @@
     @media (max-width: 360px) {
       .hero { padding-top: 30px; }
       h1 { font-size: 41px; }
-      .hero-date { gap: 8px; font-size: 12px; }
+      .hero-date { gap: 8px; font-size: 16px; }
       .hero-date span + span { padding-left: 8px; }
       .photo-grid img { height: 170px; }
     }
