@@ -65,6 +65,9 @@
     .submit-button:disabled { background: #aab3ca; cursor: wait; }
     .upload-form.is-closed .file-picker { opacity: .5; pointer-events: none; }
     .status { min-height: 28px; margin: 12px 0 0; color: var(--muted); font-size: 15px; line-height: 1.6; text-align: center; overflow-wrap: anywhere; }
+    .file-warning { position: fixed; z-index: 30; right: 16px; bottom: max(16px, calc(env(safe-area-inset-bottom, 0px) + 16px)); left: 16px; display: flex; max-width: 488px; align-items: flex-start; gap: 12px; margin: 0 auto; padding: 14px 16px; border: 1px solid #8e1b28; background: #a52b39; color: white; font-size: 15px; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; box-shadow: 0 6px 22px rgb(34 24 28 / 28%); }
+    .file-warning[hidden] { display: none; }
+    .file-warning-icon { flex: 0 0 24px; display: grid; width: 24px; height: 24px; place-items: center; border: 2px solid currentColor; border-radius: 50%; font-size: 16px; line-height: 1; }
     .footer { margin-top: 32px; color: var(--muted); font-family: var(--serif); font-size: 15px; text-align: center; }
     @media (min-width: 700px) { body { padding: 32px 0; } .page { min-height: calc(100vh - 64px); box-shadow: 0 18px 70px rgb(61 45 30 / 16%); } }
   </style>
@@ -108,6 +111,10 @@
     </form>
     <footer class="footer">함께 축하해 주셔서 고맙습니다</footer>
   </main>
+  <p class="file-warning" id="file-warning" role="alert" aria-live="assertive" hidden>
+    <span class="file-warning-icon" aria-hidden="true">!</span>
+    <span id="file-warning-message"></span>
+  </p>
 
   <script>
     const UPLOAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbzIHVftfbVmibfFUCy8xuLT1GHBKZQb7mRcM5jKYVIfrTgT_NE-OOWDqBSmPGLLE7E/exec";
@@ -120,11 +127,21 @@
     const fileList = document.querySelector("#file-list");
     const uploadButton = document.querySelector("#upload-button");
     const uploadStatus = document.querySelector("#upload-status");
+    const fileWarning = document.querySelector("#file-warning");
+    const fileWarningMessage = document.querySelector("#file-warning-message");
     const progressGroup = document.querySelector("#progress-group");
     const uploadProgress = document.querySelector("#upload-progress");
     const progressLabel = document.querySelector("#progress-label");
     const allowedTypes = /^(image\/|video\/)/;
     let selectedFiles = [];
+    let fileWarningTimer;
+
+    function showFileWarning(message) {
+      fileWarningMessage.textContent = message;
+      fileWarning.hidden = false;
+      window.clearTimeout(fileWarningTimer);
+      fileWarningTimer = window.setTimeout(() => { fileWarning.hidden = true; }, 8000);
+    }
 
     function getSeoulDate(date = new Date()) {
       const parts = new Intl.DateTimeFormat("en-CA", {
@@ -163,9 +180,13 @@
       }));
       if (oversizedFiles.length) {
         const rejectedNames = oversizedFiles.map(file => file.name).join(", ");
-        uploadStatus.textContent = `20MB 초과 파일은 목록에서 제외했습니다: ${rejectedNames}`;
+        const warning = `20MB를 초과한 파일은 업로드 목록에서 제외했습니다: ${rejectedNames}`;
+        uploadStatus.textContent = warning;
+        showFileWarning(warning);
       } else {
         uploadStatus.textContent = selectedFiles.length ? `${selectedFiles.length}개 파일을 선택했습니다.` : "";
+        fileWarning.hidden = true;
+        window.clearTimeout(fileWarningTimer);
       }
     });
 
